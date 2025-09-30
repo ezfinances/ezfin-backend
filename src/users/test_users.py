@@ -21,6 +21,6 @@ async def test_read_user():
 
 # UPDATE
 @pytest.mark.asyncio
-@pytest.mark.skip(reason="Teste de atualização de usuário")
+@pytest.mark.skip(reason="Teste de mudar senha de usuário")
 async def test_update_user():
     pass

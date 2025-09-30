@@ -1,8 +1,6 @@
 # ezfin-backend
 
-# 1. Construir a imagem
-docker build -t meu-projeto .
+sudo docker-compose down --volumes
+sudo docker-compose up --build
 
-# 2. Rodar o container
-docker run -p 8000:8000 meu-projeto
 
