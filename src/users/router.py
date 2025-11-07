@@ -4,17 +4,11 @@ from fastapi.security import OAuth2PasswordRequestForm
 from src.database import SessionLocal, engine, Base
 from src.users import schema, repository, model
 from src.security import create_access_token
+from src.dependencies import get_db
 
 Base.metadata.create_all(bind=engine)
 
 router = APIRouter(prefix="/users", tags=["users"])
-
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
 
 @router.post("/register", response_model=schema.UserOut)
 def register(user: schema.UserCreate, db: Session = Depends(get_db)):
@@ -34,18 +28,19 @@ def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depend
     access_token = create_access_token(data={"sub": user.username})
     return {"access_token": access_token, "token_type": "bearer"}
 
-@router.post("/change-password")
-def change_password(
-    username: str = Body(...),
-    current_password: str = Body(...),
-    new_password: str = Body(...),
-    new_password_confirm: str = Body(...),
+@router.put("/update", response_model=schema.UserOut)
+def update_user(
+    user_update: schema.UserUpdate,
     db: Session = Depends(get_db)
 ):
-    if new_password != new_password_confirm:
-        raise HTTPException(status_code=400, detail="New passwords do not match")
-    user = repository.authenticate_user(db, username, current_password)
+    user = repository.get_user_by_username(db, user_update.username)
     if not user:
-        raise HTTPException(status_code=401, detail="Incorrect current password")
-    repository.update_user_password(db, user, new_password)
-    return {"msg": "Password updated successfully"}
+        raise HTTPException(status_code=404, detail="User not found")
+    updated_user = repository.update_user(
+        db,
+        user,
+        email=user_update.email,
+        name=user_update.name,
+        password=user_update.password,
+    )
+    return updated_user

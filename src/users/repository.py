@@ -1,9 +1,7 @@
 from sqlalchemy.orm import Session
 from src.users import model, schema
 from src.security import get_password_hash, verify_password
-
-def get_user_by_username(db: Session, username: str):
-    return db.query(model.User).filter(model.User.username == username).first()
+from src.dependencies import get_user_by_username
 
 def get_user_by_email(db: Session, email: str):
     return db.query(model.User).filter(model.User.email == email).first()
@@ -25,6 +23,18 @@ def authenticate_user(db: Session, username: str, password: str):
 def update_user_password(db: Session, user, new_password: str):
     from src.security import get_password_hash
     user.hashed_password = get_password_hash(new_password)
+    db.commit()
+    db.refresh(user)
+    return user
+
+def update_user(db: Session, user, email: str | None, name: str | None, password: str | None):
+    if email:
+        user.email = email
+    if name:
+        user.name = name
+    if password:
+        from src.security import get_password_hash
+        user.hashed_password = get_password_hash(password)
     db.commit()
     db.refresh(user)
     return user
