@@ -1,3 +1,5 @@
+"""Descrição curta do que esse módulo faz."""
+
 from pydantic import BaseModel
 
 class BankAccountBase(BaseModel):

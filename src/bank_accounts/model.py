@@ -1,8 +1,12 @@
+"""Classe conta bancaria"""
+
 from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
 from src.database import Base
 
 class BankAccount(Base):
+    """Representa uma conta bancária vinculada a um usuário."""
+ 
     __tablename__ = "bank_accounts"
 
     id = Column(Integer, primary_key=True, index=True)

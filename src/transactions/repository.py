@@ -1,7 +1,7 @@
+"""gerencia as operações de transações das contas bancárias dos usuários"""
+
 from sqlalchemy.orm import Session
 from src.transactions import model, schema
-
-# Define the database operations for transactions here
 
 def create_transaction(db: Session, transaction: schema.TransactionCreate):
     db_transaction = model.Transaction(**transaction.dict())

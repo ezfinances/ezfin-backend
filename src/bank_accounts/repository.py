@@ -1,3 +1,5 @@
+"""gerencia as operações das contas bancárias dos usuários"""
+
 from sqlalchemy.orm import Session
 from src.bank_accounts import model, schema
 

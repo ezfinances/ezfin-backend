@@ -1,3 +1,5 @@
+"""rotas da API para a gestão das transações"""
+
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from src.dependencies import get_db

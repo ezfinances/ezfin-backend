@@ -1,3 +1,5 @@
+"""rotas da API para a gestão dos usuários"""
+
 from fastapi import APIRouter, Depends, HTTPException, status, Body
 from sqlalchemy.orm import Session
 from fastapi.security import OAuth2PasswordRequestForm

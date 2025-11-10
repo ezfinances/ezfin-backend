@@ -1,3 +1,5 @@
+"""rotas da API para a criação do relatório"""
+
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from src.dependencies import get_db

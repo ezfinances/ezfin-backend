@@ -1,9 +1,10 @@
+"""Testes do dashboard"""
+
 import pytest
 from sqlalchemy.orm import Session
 from src.dashboard.service import get_dashboard_data
 from src.database import Base, engine
 
-# Fixture para configurar o banco de dados de teste
 @pytest.fixture(scope="module")
 def test_db():
     Base.metadata.create_all(bind=engine)

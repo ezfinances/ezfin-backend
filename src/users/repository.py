@@ -1,3 +1,5 @@
+"""gerencia as operações de manipulação dos usuários"""
+
 from sqlalchemy.orm import Session
 from src.users import model, schema
 from src.security import get_password_hash, verify_password

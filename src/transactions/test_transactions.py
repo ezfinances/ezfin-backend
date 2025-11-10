@@ -1,9 +1,10 @@
+"""Testes das transações"""
+
 import pytest
 from sqlalchemy.orm import Session
 from src.transactions import repository, schema
 from src.database import Base, engine
 
-# Fixture para configurar o banco de dados de teste
 @pytest.fixture(scope="module")
 def test_db():
     Base.metadata.create_all(bind=engine)

@@ -1,10 +1,11 @@
+"""Testes de conta bancaria"""
+
 import pytest
 from sqlalchemy.orm import Session
 from src.bank_accounts import repository, schema
 from src.database import Base, engine
 from src.users import repository as user_repository, schema as user_schema
 
-# Fixture para configurar o banco de dados de teste
 @pytest.fixture(scope="module")
 def test_db():
     Base.metadata.create_all(bind=engine)

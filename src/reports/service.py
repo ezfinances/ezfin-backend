@@ -1,7 +1,6 @@
 from sqlalchemy.orm import Session
 from src.transactions.repository import get_transactions_by_user
 
-# Define the logic for generating financial reports here
 def generate_report(db: Session, user_id: int):
     transactions = get_transactions_by_user(db, user_id)
 

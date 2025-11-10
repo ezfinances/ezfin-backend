@@ -1,3 +1,5 @@
+"""Arquivo principal"""
+
 from fastapi import FastAPI
 from src.users.router import router as users_router
 from src.bank_accounts.router import router as bank_accounts_router
@@ -15,5 +17,5 @@ app.include_router(reports_router)
 
 @app.get("/")
 def read_root():
+    """Imprime uma mensagem no front pra mostrar que esta funcionando"""
     return {"msg": "Bem-vindo ao EzFin!"}
-

@@ -1,9 +1,10 @@
+"""Testes do relatório"""
+
 import pytest
 from sqlalchemy.orm import Session
 from src.reports.service import generate_report
 from src.database import Base, engine
 
-# Fixture para configurar o banco de dados de teste
 @pytest.fixture(scope="module")
 def test_db():
     Base.metadata.create_all(bind=engine)

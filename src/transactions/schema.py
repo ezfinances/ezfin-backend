@@ -1,7 +1,6 @@
 from pydantic import BaseModel
 from datetime import datetime
 
-# Define the Pydantic schemas for transactions here
 class TransactionBase(BaseModel):
     amount: float
     description: str | None = None
