@@ -2,13 +2,9 @@
 
 from fastapi import APIRouter, Depends, HTTPException, status, Body
 from sqlalchemy.orm import Session
-from fastapi.security import OAuth2PasswordRequestForm
-from src.database import SessionLocal, engine, Base
 from src.users import schema, repository, model
 from src.security import create_access_token
 from src.dependencies import get_db
-
-Base.metadata.create_all(bind=engine)
 
 router = APIRouter(prefix="/users", tags=["users"])
 
@@ -23,7 +19,7 @@ def register(user: schema.UserCreate, db: Session = Depends(get_db)):
     return repository.create_user(db, user)
 
 @router.post("/login", response_model=schema.Token)
-def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
+def login(form_data: schema.UserLogin = Body(...), db: Session = Depends(get_db)):
     user = repository.authenticate_user(db, form_data.username, form_data.password)
     if not user:
         raise HTTPException(status_code=401, detail="Incorrect username or password")

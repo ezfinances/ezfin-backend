@@ -1,6 +1,6 @@
 """Classe conta bancaria"""
 
-from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy import Column, Integer, String, ForeignKey, Float
 from sqlalchemy.orm import relationship
 from src.database import Base
 
@@ -14,5 +14,9 @@ class BankAccount(Base):
     account_name = Column(String, nullable=False)
     account_number = Column(String, unique=True, nullable=False)
     bank_name = Column(String, nullable=False)
+    account_type = Column(String, nullable=False)
+    status = Column(String, default="active", nullable=False)
+    balance = Column(Float, default=0.0, nullable=False)
 
     user = relationship("User", back_populates="bank_accounts")
+    transactions = relationship("Transaction", back_populates="bank_account")

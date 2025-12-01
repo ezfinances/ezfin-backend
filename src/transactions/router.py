@@ -14,9 +14,11 @@ def create_transaction(
     db: Session = Depends(get_db),
     current_user: dict = Depends(get_current_user),
 ):
-    if transaction.user_id != current_user["id"]:
-        raise HTTPException(status_code=403, detail="Not authorized to create this transaction.")
-    return repository.create_transaction(db, transaction)
+    # Criar transação com user_id do usuário atual
+    transaction_data = transaction.dict()
+    transaction_data['user_id'] = current_user["id"]
+    transaction_obj = schema.TransactionCreate(**transaction_data)
+    return repository.create_transaction(db, transaction_obj)
 
 @router.get("/", response_model=list[schema.Transaction])
 def get_user_transactions(

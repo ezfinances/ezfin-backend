@@ -5,6 +5,10 @@ class UserCreate(BaseModel):
     password: str
     email: EmailStr
 
+class UserLogin(BaseModel):
+    username: str
+    password: str
+
 class UserOut(BaseModel):
     id: int
     username: str

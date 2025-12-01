@@ -49,4 +49,4 @@ def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(
     user = get_user_by_username(db, username)
     if user is None:
         raise HTTPException(status_code=404, detail="User not found")
-    return user
+    return {"username": user.username, "id": user.id}
