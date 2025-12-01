@@ -26,7 +26,7 @@ def setup_users(test_db):
 
 @pytest.mark.usefixtures("setup_users")
 def test_create_bank_account(test_db):
-    account_data = schema.BankAccountCreate(account_name="Test Account", account_number="123456", bank_name="Test Bank")
+    account_data = schema.BankAccountCreate(account_name="Test Account", account_number="123456", bank_name="Test Bank", account_type="Checking")
     account = repository.create_bank_account(test_db, account_data, user_id=1)
     assert account.account_name == "Test Account"
     assert account.bank_name == "Test Bank"
@@ -38,21 +38,21 @@ def test_read_bank_accounts(test_db):
 
 @pytest.mark.usefixtures("setup_users")
 def test_update_bank_account(test_db):
-    account_data = schema.BankAccountCreate(account_name="Temp Account", account_number="999999", bank_name="Temp Bank")
+    account_data = schema.BankAccountCreate(account_name="Temp Account", account_number="999999", bank_name="Temp Bank", account_type="Savings")
     account = repository.create_bank_account(test_db, account_data, user_id=1)
     account.account_name = "Updated Account Name"
     test_db.commit()
     updated_account = test_db.query(repository.model.BankAccount).filter_by(id=account.id).first()
     assert updated_account.account_name == "Updated Account Name"
 
-@pytest.mark.parametrize("account_name, account_number, bank_name, user_id", [
-    ("Account 1", "111111", "Bank A", 1),
-    ("Account 2", "222222", "Bank B", 2),
-    ("Account 3", "333333", "Bank C", 3),
+@pytest.mark.parametrize("account_name, account_number, bank_name, account_type, user_id", [
+    ("Account 1", "111111", "Bank A", "Checking", 1),
+    ("Account 2", "222222", "Bank B", "Savings", 2),
+    ("Account 3", "333333", "Bank C", "Investment", 3),
 ])
-def test_create_bank_account_parametrized(test_db, account_name, account_number, bank_name, user_id):
+def test_create_bank_account_parametrized(test_db, account_name, account_number, bank_name, account_type, user_id):
     account_data = schema.BankAccountCreate(
-        account_name=account_name, account_number=account_number, bank_name=bank_name
+        account_name=account_name, account_number=account_number, bank_name=bank_name, account_type=account_type
     )
     account = repository.create_bank_account(test_db, account_data, user_id=user_id)
     assert account.account_name == account_name

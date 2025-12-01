@@ -17,12 +17,14 @@ def test_get_dashboard_data(test_db):
     user_id = 1
     dashboard_data = get_dashboard_data(test_db, user_id)
     assert "total_balance" in dashboard_data
-    assert "total_spent" in dashboard_data
-    assert "total_received" in dashboard_data
+    assert "total_income" in dashboard_data
+    assert "total_expenses" in dashboard_data
+    assert "total_accounts" in dashboard_data
 
 @pytest.mark.parametrize("user_id", [1, 2, 3])
 def test_get_dashboard_data_parametrized(test_db, user_id):
     dashboard_data = get_dashboard_data(test_db, user_id)
     assert "total_balance" in dashboard_data
-    assert "total_spent" in dashboard_data
-    assert "total_received" in dashboard_data
+    assert "total_income" in dashboard_data
+    assert "total_expenses" in dashboard_data
+    assert "total_accounts" in dashboard_data

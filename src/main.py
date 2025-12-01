@@ -9,9 +9,9 @@ from src.transactions.router import router as transactions_router
 from src.dashboard.router import router as dashboard_router
 from src.reports.router import router as reports_router
 # Import all models to ensure they are registered with Base
-from src.users import model as users_model
-from src.bank_accounts import model as bank_accounts_model
-from src.transactions import model as transactions_model
+# from src.users import model as users_model
+# from src.bank_accounts import model as bank_accounts_model
+# from src.transactions import model as transactions_model
 
 # Create all tables
 Base.metadata.create_all(bind=engine)
