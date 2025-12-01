@@ -16,6 +16,4 @@ def get_dashboard_data(db: Session, user_id: int):
         "total_income": total_income,
         "total_expenses": total_expenses,
         "total_accounts": total_accounts,
-        "transactions": transactions,
-        "bank_accounts": bank_accounts,
     }

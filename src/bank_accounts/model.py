@@ -19,4 +19,4 @@ class BankAccount(Base):
     balance = Column(Float, default=0.0, nullable=False)
 
     user = relationship("User", back_populates="bank_accounts")
-    transactions = relationship("Transaction", back_populates="bank_account")
+    transactions = relationship("Transaction", back_populates="bank_account", cascade="all, delete-orphan")
