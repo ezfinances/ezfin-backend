@@ -16,7 +16,7 @@ def create_bank_account(db: Session, bank_account: schema.BankAccountCreate, use
         bank_name=bank_account.bank_name,
         account_type=bank_account.account_type,
         status="active",
-        balance=0.0,
+        balance=bank_account.balance,
     )
     db.add(db_bank_account)
     db.commit()

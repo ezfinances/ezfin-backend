@@ -8,7 +8,7 @@ class BankAccountBase(BaseModel):
     account_type: str
 
 class BankAccountCreate(BankAccountBase):
-    pass
+    balance: float = 0.0
 
 class BankAccountOut(BankAccountBase):
     id: int

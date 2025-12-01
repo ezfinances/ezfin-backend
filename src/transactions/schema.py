@@ -9,7 +9,7 @@ class TransactionBase(BaseModel):
     bank_account_id: int
 
 class TransactionCreate(TransactionBase):
-    pass
+    user_id: int | None = None
 
 class Transaction(TransactionBase):
     id: int

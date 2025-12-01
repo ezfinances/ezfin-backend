@@ -23,10 +23,13 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:3000",
+        "http://localhost:3001",
         "http://localhost:5000",
         "http://127.0.0.1:3000",
+        "http://127.0.0.1:3001",
         "http://127.0.0.1:5000",
         "http://host.docker.internal:3000",
+        "http://host.docker.internal:3001",
         "http://host.docker.internal:5000",
         "http://frontend:3000",
         "http://frontend:5000",
