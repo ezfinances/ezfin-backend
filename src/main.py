@@ -22,18 +22,24 @@ app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
+        # Desenvolvimento Local
         "http://localhost:3000",
         "http://localhost:3001",
         "http://localhost:5000",
         "http://127.0.0.1:3000",
         "http://127.0.0.1:3001",
         "http://127.0.0.1:5000",
+        # Docker
         "http://host.docker.internal:3000",
         "http://host.docker.internal:3001",
         "http://host.docker.internal:5000",
         "http://frontend:3000",
         "http://frontend:5000",
-        "*"
+        # Produção - Fly.io
+        "https://ezfin-frontend.fly.dev",
+        "https://ezfin-backend.fly.dev",
+        "http://ezfin-frontend.fly.dev",
+        "http://ezfin-backend.fly.dev",
     ],
     allow_credentials=True,
     allow_methods=["*"],
